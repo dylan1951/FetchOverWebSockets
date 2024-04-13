@@ -24,7 +24,7 @@ export class TlsStream {
         let onData = null;
 
         this.client = forge.tls.createConnection({
-
+            virtualHost: "minecraft.net",
             caStore: this.certificateAuthorityStore,
 
             connected: async (connection) => {
