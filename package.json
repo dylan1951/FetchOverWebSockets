@@ -27,7 +27,7 @@
     "typescript": "^3.7.3"
   },
   "dependencies": {
-    "node-forge": "latest",
+    "node-forge": "git+https://github.com/moritonal/forge.git",
     "uri-js": "^4.2.2"
   }
 }
