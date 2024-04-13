@@ -23,14 +23,14 @@ export default class FetchOverWebSocket {
 
         let caStore = [];
 
-        for (let cert in certs) {
-
-            caStore.push(await (await fetch(certs[cert])).text());
-        }
+        // for (let cert in certs) {
+        //
+        //     caStore.push(await (await fetch(certs[cert])).text());
+        // }
 
         return caStore;
     }
-    
+
     private async handleResponse(client: IClosable, stream: AsyncGenerator<string, void, never>) : Promise<Response> {
 
         // Pipe the HTTP stream to a line stream
@@ -125,5 +125,5 @@ export default class FetchOverWebSocket {
         let response = await this.handleResponse(tlsStream.client, dataStream);
 
         return response;
-    }    
+    }
 }
