@@ -1,4 +1,4 @@
-import * as forge from "node-forge"
+import * as forge from "node-forge/dist/forge.all.min"
 import * as URI from "uri-js";
 
 import { WebSock } from "./WebSock"
@@ -24,10 +24,12 @@ export class TlsStream {
         let onData = null;
 
         this.client = forge.tls.createConnection({
-            virtualHost: "minecraft.net",
+            virtualHost: "www.cs.auckland.ac.nz",
             caStore: this.certificateAuthorityStore,
 
-            connected: async (connection) => {
+            connected: async (connection: { prepare: (arg0: string) => void; }) => {
+
+                const request = forge.http.createRequest({method: 'GET', path: "https://www.cs.auckland.ac.nz"});
 
                 let postMessage = [
                     `${init.method} ${init.url} HTTP/1.1`,
@@ -45,7 +47,7 @@ export class TlsStream {
 
                 let httpPayload = postMessage.join("\r\n");
 
-                connection.prepare(httpPayload);
+                connection.prepare(request.toString());
             },
             tlsDataReady: (connection) => {
 
